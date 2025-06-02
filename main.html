@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+  <title>B11111101 期中作業-獵人小屋</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .main-container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 2rem auto;
+      text-align: center;
+      padding: 2rem 1rem;
+
+      /* ✅ 淡黃色半透明背景遮罩 */
+      background-color: rgba(255, 243, 209, 0.85);
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .a1 {
+      color: #a15e00;
+      font-size: 7rem;
+      margin-bottom: 1rem;
+    }
+
+    .a2 {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .a2 li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 2rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .a2 li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #c97600;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .a2 li a:hover {
+      color: #c97600;
+    }
+
+    .a2 li a:hover::after {
+      width: 100%;
+    }
+
+    .tab-content {
+      display: none;
+      text-align: center;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .arms-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .arms-a1, .arms-a2 {
+      background-color: #fff3d1;
+      border-radius: 16px;
+      padding: 1rem;
+      width: 250px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .arms-a1 img, .arms-a2 img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .armor-box {
+      background-color: #fff3d1;
+      border-radius: 16px;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 300px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .armor-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .contact-a1, .contact-a2 {
+      background-color: #fff3d1;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-box {
+      background-color: #fff3d1;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      max-width: 500px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    select, input[type="text"], button {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+    }
+
+    button {
+      background-color: #c97600;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #a15e00;
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+      }
+    }
+
+    .intro-box {
+      background-color: #fff3d1;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      margin: 1rem auto;
+      max-width: 800px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .intro-box img {
+      width: 320px;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .intro-text ul {
+      list-style: none;
+      padding: 0;
+      font-size: 1.5rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ 背景影片 -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="video.mp4" type="video/mp4">
+    您的瀏覽器不支援影片播放。
+  </video>
+
+  <!-- ✅ 內容容器加遮罩 -->
+  <div class="main-container">
+    <h1 class="a1">尾巴的小屋</h1>
+
+    <ul class="a2">
+      <li><a class="tab-link active" data-target="introduce">獵人簡介</a></li>
+      <li><a class="tab-link" data-target="arms">持有裝備</a></li>
+      <li><a class="tab-link" data-target="contact">聯絡方式</a></li>
+      <li><a class="tab-link" data-target="invite">邀請輸入</a></li>
+    </ul>
+
+    <div id="introduce" class="tab-content active">
+      <div class="intro-box">
+        <img src="獵人圖.png" alt="獵人圖片">
+        <div class="intro-text">
+          <ul>
+            <li>- 獵人: 尾巴🍡</li>
+            <li>- 小弟: 嘎咪🐱</li>
+            <li>- HR: 169等</li>
+            <li>- 任務次數: 283次</li>
+            <li>- 成就獲得率: 72%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="arms" class="tab-content">
+      <h2>- 武器 -</h2>
+      <div class="arms-container">
+        <div class="arms-a1">   
+          <h3>重弩</h3>
+          <img src="重弩.png" alt="重弩">
+          <ul>
+            <li>喜愛度: ❤️❤️❤️❤️❤️</li>
+            <li>強度: ⚡⚡⚡⚡⚡</li>
+            <li>防禦: 🛡️🛡️</li>
+          </ul>
+        </div>
+        <div class="arms-a2">
+          <h3>長槍</h3>
+          <img src="長槍.png" alt="長槍">
+          <ul>
+            <li>喜愛度: ❤️❤️❤️❤️</li>
+            <li>強度: ⚡⚡</li>
+            <li>防禦: 🛡️🛡️🛡️🛡️🛡️</li>
+          </ul>
+        </div>
+      </div>
+      <div class="armor-box">
+        <h3>防具展示</h3>
+        <img src="防具.png" alt="防具圖片">
+      </div>
+    </div>
+
+    <div id="contact" class="tab-content">
+      <div class="contact-a1">    
+        <h2>Steam - 狂亂小咪</h2>
+        <h3>好友代碼</h3>
+        <p>- 217132002 -</p>
+      </div>
+      <div class="contact-a2">    
+        <h2>Email</h2>
+        <p>- B11111101@yuntech.edu.tw -</p>
+      </div>
+    </div>
+
+    <div id="invite" class="tab-content">
+      <div class="form-box">
+        <h2>好友添加輸入表單</h2>
+        <label for="type-select">選擇添加方式：</label>
+        <select id="type-select">
+          <option value="">-- 請選擇 --</option>
+          <option value="steam">Steam 好友代碼</option>
+          <option value="hunter">魔物獵人 ID</option>
+          <option value="email">Email</option>
+        </select>
+        <div id="input-area" style="display: none; margin-top: 1rem;">
+          <input type="text" id="invite-input" placeholder="">
+          <button id="submit-btn">送出</button>
+          <p id="greeting" style="display: none; color: #a15e00; font-weight: bold; margin-top: 1rem;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-link');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        const target = tab.getAttribute('data-target');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    const select = document.getElementById('type-select');
+    const inputArea = document.getElementById('input-area');
+    const input = document.getElementById('invite-input');
+
+    select.addEventListener('change', () => {
+      const value = select.value;
+      if (value) {
+        inputArea.style.display = 'block';
+        switch (value) {
+          case 'steam':
+            input.placeholder = '請輸入 Steam 好友代碼'; break;
+          case 'hunter':
+            input.placeholder = '請輸入魔物獵人 ID'; break;
+          case 'email':
+            input.placeholder = '請輸入 Email'; break;
+        }
+      } else {
+        inputArea.style.display = 'none';
+      }
+    });
+
+    const submitBtn = document.getElementById('submit-btn');
+    const greeting = document.getElementById('greeting');
+
+    submitBtn.addEventListener('click', () => {
+      greeting.textContent = '哈囉~真開心見到你!';
+      greeting.style.display = 'block';
+      greeting.classList.remove('fade-out');
+      greeting.classList.add('fade-in');
+
+      setTimeout(() => {
+        greeting.classList.remove('fade-in');
+        greeting.classList.add('fade-out');
+        setTimeout(() => {
+          greeting.style.display = 'none';
+        }, 1000);
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
